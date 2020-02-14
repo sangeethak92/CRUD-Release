@@ -2,9 +2,12 @@ pipeline {
    agent any
    stages {
       stage('Starting the Release for Prod') {
+             script {
+	        pom = readMavenPom file: "pom.xml";
 		    steps {
-			    xlrCreateRelease releaseTitle: 'Release for $BUILD_TAG', serverCredentials: 'XLReleaseServer', startRelease: true, template: 'Test/ProdReleaseTemplate', variables: [propertyName: 'BRANCH_NAME', propertyValue: '${BRANCH_NAME}']
+			    xlrCreateRelease releaseTitle: 'Release for $BUILD_TAG', serverCredentials: 'XLReleaseServer', startRelease: true, template: 'Test/ProdReleaseTemplate', variables: [[propertyName: 'BRANCH_NAME', propertyValue: '${BRANCH_NAME}'], [propertyName: 'POM_VERSION', propertyValue: '${pom.version}']]
 			       }
+               }			       
      }        
   }
 }
