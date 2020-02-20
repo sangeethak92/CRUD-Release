@@ -27,35 +27,44 @@ pipeline {
 		}				
 		stage("XLDeploy Package") {
 			agent { label 'master' }
-			when {
-				not {
-					anyOf { 
-						branch 'Re*' 
-						branch 'master'
-					}
-				}
-			}
-			steps {
-				sh "sed -i 's/{{PACKAGE_VERSION}}/$BUILD_NUMBER/g' deployit-manifest.xml"
+            steps {
+                script {
+		     pom = readMavenPom file: "pom.xml";
+		     POM_VERSION = "${pom.version}";
+		     
+                    if (env.BRANCH_NAME == 'master' | env.BRANCH_NAME == 'PR*' ) {
+                       sh "sed -i 's/{{PACKAGE_VERSION}}/$BUILD_NUMBER/g' deployit-manifest.xml"
 				sh "sed -i 's/{{Deploy-App}}/$JOB_BASE_NAME/g' deployit-manifest.xml"
 				xldCreatePackage artifactsPath: 'target', manifestPath: 'deployit-manifest.xml', darPath: "${BUILD_NUMBER}.0.dar"
-			
-			}
-		}
+                    } else {
+                       sh "sed -i 's/{{PACKAGE_VERSION}}/$pom.version.$BUILD_NUMBER/g' deployit-manifest.xml"
+				sh "sed -i 's/{{Deploy-App}}/$JOB_BASE_NAME/g' deployit-manifest.xml"
+				xldCreatePackage artifactsPath: 'target', manifestPath: 'deployit-manifest.xml', darPath: "${pom.version}.${BUILD_NUMBER}.dar"
+                    }
+                }
+            }
+             } 
+		
+		
 		stage('XLDeploy Publish') {  
 		agent { label 'master' }
-			when {
-				not {
-					anyOf { 
-						branch 'Re*' 
-						branch 'master'
-					}
-				}
-			}
+
 			steps {
-				xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${BUILD_NUMBER}.0.dar"
-			}
-		}
+			
+			script {
+			 pom = readMavenPom file: "pom.xml";
+			 if (env.BRANCH_NAME == 'master' | env.BRANCH_NAME == 'PR*' ) {
+			 
+                               xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${BUILD_NUMBER}.0.dar"
+                       } else {
+		       
+                             xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${pom.version}.${BUILD_NUMBER}.dar"
+                       }
+				
+	             }			
+		 }
+              } 
+		
 		/*stage('Request to Pull Changes') {
 			when {
 					branch 'dev'
