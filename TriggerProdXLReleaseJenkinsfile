@@ -1,0 +1,14 @@
+pipeline {
+   agent { label 'master' }
+    options { skipDefaultCheckout() }
+   stages {
+      stage('Starting the Release for Prod') {
+		    steps {
+		        script {
+			  
+			    xlrCreateRelease releaseTitle: 'Release from $BUILD_TAG', serverCredentials: 'XLReleaseServer', startRelease: true, template: 'Test/ProdReleaseTemplate', variables: [[propertyName: 'BRANCH_NAME', propertyValue: '${BRANCH_NAME}']]
+			       }
+               }			       
+     }        
+  }
+}
