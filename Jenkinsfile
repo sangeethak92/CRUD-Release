@@ -102,14 +102,27 @@ pipeline {
 				//sh "git rebase master"
 				//sh "git push -f origin master"
 			}
-		}				
+		}
+	      
+	        stage('Pre check MergeBuild') {
+			when {
+				branch 'PR*'
+			}
+			steps {
+					echo 'Clean Build'
+					sh "ls"
+					sh "git branch"
+					sh 'mvn clean compile package -Dtest=\\!TestRunner* -DfailIfNoTests=false test'
+
+			}
+		}	    
 		stage('Approve the PR request') {
 			when {
 				branch 'PR*'
 			}
 			steps {
 				echo "Approve"
-				sh "curl --user sangeethak92:4aecd275521fe519115ce2c9ed51c4a418a977b4 --data '{\"body\":\"This PR build is success from ${BUILD_TAG}\",\"event\":\"APPROVE\"}'  --header Content-Type:application/json  --request POST https://api.github.com/repos/tonysandeep/trunk_release/pulls/${CHANGE_ID}/reviews"
+				sh "curl --user sangeethak92:4aecd275521fe519115ce2c9ed51c4a418a977b4 --data '{\"body\":\"This PR build is success from ${BUILD_TAG}\",\"event\":\"APPROVE\"}' --header Content-Type:application/json  --request POST https://api.github.com/repos/tonysandeep/CRUD-Release/pulls/${CHANGE_ID}/reviews"
 			}
 			post {
 				success{
@@ -120,8 +133,10 @@ pipeline {
 						 context: 'Jenkins',
 						 description: "This PR passed the Jenkins Reg Test ${BUILD_TAG} ${JOB_NAME}",
 						 targetUrl: "${env.JOB_URL}${env.BUILD_NUMBER}/testResults")						
-					} 
-					failure {
+					}
+				}
+				failure {
+					script {		
 						pullRequest.addLabel("Failed")
 						gitHubPRStatus githubPRMessage(" Failure ${BUILD_TAG}")
 						pullRequest.createStatus(status: 'failure',
@@ -130,6 +145,7 @@ pipeline {
 						 targetUrl: "${env.JOB_URL}${env.BUILD_NUMBER}/testResults")						
 					}
 				}
+				
 			}
 		}
 		/* stage('Release Approval') {
@@ -169,7 +185,7 @@ pipeline {
 			when {
 				anyOf { branch 'Re*' 
 					branch 'master'
-				}'
+				}
 			}
 			steps {
 				echo 'clean test'
