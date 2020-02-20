@@ -6,7 +6,7 @@
 	<version>1.0-SNAPSHOT</version>
 	<name>SpringMVCHibernateCRUD Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-       <!-- Specifying the Versions of Spring, Hiberante, MySQL etc -->
+       
        <properties>
         <spring.version>4.1.5.RELEASE</spring.version>
         <hibernate.version>4.3.8.Final</hibernate.version>
