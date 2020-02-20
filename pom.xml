@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.jwt.spring</groupId>
 	<artifactId>SpringMVCHibernateCRUD</artifactId>
@@ -19,6 +18,13 @@
         <java.version>1.7</java.version>
        
     </properties>
+	
+	 <scm>
+    <connection>scm:git:https://github.com/sangeethak92/CRUD-Release.git</connection>
+    <developerConnection>scm:git:https://github.com/sangeethak92/CRUD-Release.git</developerConnection>
+    <url>https://github.com/sangeethak92/CRUD-Release.git</url>
+   <tag>SpringMVCHibernateCRUD-@{releaseVersion}</tag>
+  </scm>
        <dependencies>
               <dependency>
             <groupId>org.springframework</groupId>
