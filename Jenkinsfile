@@ -72,11 +72,11 @@ pipeline {
 				branch 'PR*'
 			} */
 			steps {
-				sh "git checkout -b pullrequest"						
+				sh "git checkout -b ${PR_NUMBER}"						
 				sh "git fetch origin master:master"					
 				sh "git checkout master"
 				echo 'checking local merge to master'
-				sh "git merge pullrequest"
+				sh "git merge ${PR_NUMBER}"
 				//sh "git pull upstream master && git push origin '${PR_NUMBER}'"
 				//sh "git checkout '${PR_NUMBER}'"
 				//sh "git rebase master"
