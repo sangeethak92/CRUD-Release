@@ -21,11 +21,11 @@ pipeline {
 						checkout scm
 						sh "ls"
 						sh "pwd"
-						//sh "mvn clean package -DskipTests"
-						sh "mvn sonar:sonar clean compile package -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=CrudApp -Dsonar.host.url=http://10.62.125.9:8085/ -Dsonar.login=f16fabd2605044f38e79e4c0e4bc5f73c55dd144"				 
+						sh "mvn clean package -DskipTests"
+						//sh "mvn sonar:sonar clean compile package -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=CrudApp -Dsonar.host.url=http://10.62.125.9:8085/ -Dsonar.login=f16fabd2605044f38e79e4c0e4bc5f73c55dd144"				 
 				}
 		}				
-		stage("XLDeploy Package") {
+ /*		stage("XLDeploy Package") {
 			agent { label 'master' }
             steps {
                 script {
@@ -65,7 +65,7 @@ pipeline {
 		 }
               } 
 		
-		
+	*/	
 			
 		stage('Merge the PR Locally') {
 			when {
