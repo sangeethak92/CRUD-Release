@@ -102,7 +102,7 @@ pipeline {
 			} */
 			steps {
 				echo "Approve"
-				sh "curl --user tonysandeep:b0b923b0eb57279f2f598b9d9ffdf189af9763a1 --data '{\"body\":\"This PR build is success from ${BUILD_TAG}\",\"event\":\"APPROVE\"}' --header Content-Type:application/json  --request POST https://api.github.com/repos/sangeethak92/CRUD-Release/pulls/${PR_NUMBER}/reviews"
+				sh "curl --user tonysandeep:Qwerty0420 --data '{\"body\":\"This PR build is success from ${BUILD_TAG}\",\"event\":\"APPROVE\"}' --header Content-Type:application/json  --request POST https://api.github.com/repos/sangeethak92/CRUD-Release/pulls/${PR_NUMBER}/reviews"
 			}
 			post {
 				success{
