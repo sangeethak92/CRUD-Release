@@ -83,6 +83,7 @@ pipeline {
 				branch 'PR*'
 			} */
 			steps {
+				sh "git init"
 				sh "git checkout -b ${PR_NUMBER}"	
 				//sh "git checkout -b pullrequest"
 				sh "git fetch origin master:master"					
