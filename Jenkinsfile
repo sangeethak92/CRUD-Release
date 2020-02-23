@@ -72,13 +72,13 @@ pipeline {
 				branch 'PR*'
 			} */
 			steps {
-				//sh "git checkout -b ${PR_NUMBER}"	
-				sh "git checkout -b pullrequest"
+				sh "git checkout -b ${PR_NUMBER}"	
+				//sh "git checkout -b pullrequest"
 				sh "git fetch origin master:master"					
 				sh "git checkout master"
 				echo 'checking local merge to master'
-				//sh "git merge ${PR_NUMBER}"
-				sh "git merge pullrequest"
+				sh "git merge ${PR_NUMBER}"
+				//sh "git merge pullrequest"
 				
 				//sh "git pull upstream master && git push origin '${PR_NUMBER}'"
 				//sh "git checkout '${PR_NUMBER}'"
@@ -105,7 +105,7 @@ pipeline {
 			} */
 			steps {
 				echo "Approve"
-				sh "curl --user tonysandeep:Qwerty0420 --data '{\"body\":\"This PR build is success from ${BUILD_TAG}\",\"event\":\"APPROVE\"}' --header Content-Type:application/json  --request POST https://api.github.com/repos/sangeethak92/CRUD-Release/pulls/${CHANGE_ID}/reviews"
+				sh "curl --user tonysandeep:Qwerty0420 --data '{\"body\":\"This PR build is success from ${BUILD_TAG}\",\"event\":\"APPROVE\"}' --header Content-Type:application/json  --request POST https://api.github.com/repos/sangeethak92/CRUD-Release/pulls/${PR_NUMBER}/reviews"
 			}
 			post {
 				success{
