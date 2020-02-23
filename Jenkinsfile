@@ -4,12 +4,8 @@ pipeline {
       stages {
 		stage('Unit Test') {
 				steps {
-						echo 'Clean Build'
-						cleanWs()
-						checkout scm
-						sh "ls"
-						sh "pwd"
-						sh 'mvn clean test'
+						echo 'Unit Test'
+						
 						 
 				}
 		}	    
@@ -20,8 +16,18 @@ pipeline {
 						echo 'Clean Build'
 						cleanWs()
 					        def scmVars = checkout scm
-					        echo "git commit *******   ${scmVars.GIT_COMMIT}"
-						evn.GIT_COMMIT = scmVars.GIT_COMMIT
+						
+					        echo "scmVars.GIT_COMMIT"
+						
+					      echo "git commit *******   ${scmVars.GIT_COMMIT}"
+
+					      // Displaying the variables saving it as environment variable
+					      env.GIT_COMMIT = scmVars.GIT_COMMIT
+					      //echo "env.GIT_COMMIT"
+					      echo " *********   ${env.GIT_COMMIT}"
+						
+						
+						
 						sh "ls"
 						sh "pwd"
 						sh "mvn clean package -DskipTests"
