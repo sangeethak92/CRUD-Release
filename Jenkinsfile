@@ -16,6 +16,7 @@ pipeline {
 		stage('Build and Package') {
 			agent { label 'master' }
 				steps {
+					script {
 						echo 'Clean Build'
 						cleanWs()
 					        def scmVars = checkout scm
@@ -24,6 +25,8 @@ pipeline {
 						sh "pwd"
 						sh "mvn clean package -DskipTests"
 						//sh "mvn sonar:sonar clean compile package -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=CrudApp -Dsonar.host.url=http://10.62.125.9:8085/ -Dsonar.login=f16fabd2605044f38e79e4c0e4bc5f73c55dd144"				 
+						
+					}
 				}
 		}				
  /*		stage("XLDeploy Package") {
