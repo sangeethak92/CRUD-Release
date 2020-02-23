@@ -124,10 +124,12 @@ pipeline {
 						
 						echo "git commit !!!!!!!!!!!!!!  ${env.GIT_COMMIT}"
 						
-						curl "https://api.GitHub.com/repos/sangeethak92/CRUD-Release/statuses/${env.GIT_COMMIT}?access_token=7c60a4bf5dfaec7ab21a7cc4a21132b60cba28ab" \
+						/* curl "https://api.GitHub.com/repos/sangeethak92/CRUD-Release/statuses/${env.GIT_COMMIT}?access_token=7c60a4bf5dfaec7ab21a7cc4a21132b60cba28ab" \
                                                 -H "Content-Type: application/json" \
                                                 -X POST \
                                                 -d "{\"state\": \"success\",\"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"http://13.233.82.214:8080/job/PR-Request/$BUILD_NUMBER/console\"}"
+						*/
+						sh "curl --user sangeethak92:Jothi@1724 --data '{\"state\": \"success\",\"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"http://13.233.82.214:8080/job/GITcommit/$BUILD_NUMBER/console\"}' --header Content-Type:application/json --request POST https://api.GitHub.com/repos/sangeethak92/CRUD-Release/statuses/$env.GIT_COMMIT"
 					}
 				}
 				failure {
@@ -139,10 +141,13 @@ pipeline {
 						 description: "oops Build got failed ${BUILD_TAG} ${JOB_NAME}",
 						 targetUrl: "${env.JOB_URL}${env.BUILD_NUMBER}/testResults")  */
 						
-						curl "https://api.GitHub.com/repos/sangeethak92/CRUD-Release/statuses/${env.GIT_COMMIT}?access_token=7c60a4bf5dfaec7ab21a7cc4a21132b60cba28ab" \
+						/*curl "https://api.GitHub.com/repos/sangeethak92/CRUD-Release/statuses/${env.GIT_COMMIT}?access_token=7c60a4bf5dfaec7ab21a7cc4a21132b60cba28ab" \
                                                 -H "Content-Type: application/json" \
                                                 -X POST \
                                                 -d "{\"state\": \"failure\",\"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"http://13.233.82.214:8080/job/PR-Request/$BUILD_NUMBER/console\"}"
+						
+						*/
+						sh "curl --user sangeethak92:Jothi@1724 --data '{\"state\": \"failure\",\"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"http://13.233.82.214:8080/job/GITcommit/$BUILD_NUMBER/console\"}' --header Content-Type:application/json --request POST https://api.GitHub.com/repos/sangeethak92/CRUD-Release/statuses/$env.GIT_COMMIT"
 					}
 				}
 				
