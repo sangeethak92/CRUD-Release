@@ -21,7 +21,7 @@ pipeline {
 						cleanWs()
 					        def scmVars = checkout scm
 					        echo "git commit *******   ${scmVars.GIT_COMMIT}"
-						 = scmVars.GIT_COMMIT
+						evn.GIT_COMMIT = scmVars.GIT_COMMIT
 						sh "ls"
 						sh "pwd"
 						sh "mvn clean package -DskipTests"
