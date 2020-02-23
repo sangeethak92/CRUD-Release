@@ -4,25 +4,36 @@ pipeline {
       stages {
 		stage('Unit Test') {
 				steps {
-						echo 'Clean Build'
-						cleanWs()
-						checkout scm
-						sh "ls"
-						sh "pwd"
-						sh 'mvn clean test'
+						echo 'Unit Test'
+						
 						 
 				}
 		}	    
 		stage('Build and Package') {
 			agent { label 'master' }
 				steps {
+					script {
 						echo 'Clean Build'
 						cleanWs()
-						checkout scm
+					        def scmVars = checkout scm
+						
+					        echo "scmVars.GIT_COMMIT"
+						
+					      echo "git commit *******   ${scmVars.GIT_COMMIT}"
+
+					      // Displaying the variables saving it as environment variable
+					      env.GIT_COMMIT = scmVars.GIT_COMMIT
+					      //echo "env.GIT_COMMIT"
+					      echo " *********   ${env.GIT_COMMIT}"
+						
+						
+						
 						sh "ls"
 						sh "pwd"
 						sh "mvn clean package -DskipTests"
 						//sh "mvn sonar:sonar clean compile package -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=CrudApp -Dsonar.host.url=http://10.62.125.9:8085/ -Dsonar.login=f16fabd2605044f38e79e4c0e4bc5f73c55dd144"				 
+						
+					}
 				}
 		}				
  /*		stage("XLDeploy Package") {
@@ -117,10 +128,14 @@ pipeline {
 						 description: "This PR passed the Jenkins Reg Test ${BUILD_TAG} ${JOB_NAME}",
 						 targetUrl: "${env.JOB_URL}${env.BUILD_NUMBER}/testResults")	*/
 						
-						curl "https://api.GitHub.com/repos/sangeethak92/CRUD-Release/statuses/$GIT_COMMIT?access_token=7c60a4bf5dfaec7ab21a7cc4a21132b60cba28ab" \
+						echo "git commit !!!!!!!!!!!!!!  ${env.GIT_COMMIT}"
+						
+						/* curl "https://api.GitHub.com/repos/sangeethak92/CRUD-Release/statuses/${env.GIT_COMMIT}?access_token=7c60a4bf5dfaec7ab21a7cc4a21132b60cba28ab" \
                                                 -H "Content-Type: application/json" \
                                                 -X POST \
                                                 -d "{\"state\": \"success\",\"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"http://13.233.82.214:8080/job/PR-Request/$BUILD_NUMBER/console\"}"
+						*/
+						sh "curl --user sangeethak92:Jothi@1724 --data '{\"state\": \"success\",\"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"http://13.233.82.214:8080/job/$JOB_NAME/$BUILD_NUMBER/console\"}' --header Content-Type:application/json --request POST https://api.GitHub.com/repos/sangeethak92/CRUD-Release/statuses/$env.GIT_COMMIT"
 					}
 				}
 				failure {
@@ -132,10 +147,13 @@ pipeline {
 						 description: "oops Build got failed ${BUILD_TAG} ${JOB_NAME}",
 						 targetUrl: "${env.JOB_URL}${env.BUILD_NUMBER}/testResults")  */
 						
-						curl "https://api.GitHub.com/repos/sangeethak92/CRUD-Release/statuses/$GIT_COMMIT?access_token=7c60a4bf5dfaec7ab21a7cc4a21132b60cba28ab" \
+						/*curl "https://api.GitHub.com/repos/sangeethak92/CRUD-Release/statuses/${env.GIT_COMMIT}?access_token=7c60a4bf5dfaec7ab21a7cc4a21132b60cba28ab" \
                                                 -H "Content-Type: application/json" \
                                                 -X POST \
                                                 -d "{\"state\": \"failure\",\"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"http://13.233.82.214:8080/job/PR-Request/$BUILD_NUMBER/console\"}"
+						
+						*/
+						sh "curl --user sangeethak92:Jothi@1724 --data '{\"state\": \"failure\",\"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"http://13.233.82.214:8080/job/$JOB_NAME/$BUILD_NUMBER/console\"}' --header Content-Type:application/json --request POST https://api.GitHub.com/repos/sangeethak92/CRUD-Release/statuses/$env.GIT_COMMIT"
 					}
 				}
 				
