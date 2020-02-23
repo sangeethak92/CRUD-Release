@@ -1,6 +1,6 @@
 pipeline {
     agent { label 'master' }
-    options { skipDefaultCheckout() }
+    //options { skipDefaultCheckout() }
       stages {
 		stage('Unit Test') {
 				steps {
