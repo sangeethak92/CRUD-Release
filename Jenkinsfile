@@ -110,22 +110,32 @@ pipeline {
 			post {
 				success{
 					script { 
-						pullRequest.addLabel('BUILD SUCCESS')
+						/* pullRequest.addLabel('BUILD SUCCESS')
 						gitHubPRStatus githubPRMessage(" SUCCESS ${JOB_NAME}")
 						pullRequest.createStatus(status: 'success',
 						 context: 'Jenkins',
 						 description: "This PR passed the Jenkins Reg Test ${BUILD_TAG} ${JOB_NAME}",
-						 targetUrl: "${env.JOB_URL}${env.BUILD_NUMBER}/testResults")						
+						 targetUrl: "${env.JOB_URL}${env.BUILD_NUMBER}/testResults")	*/
+						
+						curl "https://api.GitHub.com/repos/sangeethak92/CRUD-Release/statuses/$GIT_COMMIT?access_token=7c60a4bf5dfaec7ab21a7cc4a21132b60cba28ab" \
+                                                -H "Content-Type: application/json" \
+                                                -X POST \
+                                                -d "{\"state\": \"success\",\"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"http://13.233.82.214:8080/job/PR-Request/$BUILD_NUMBER/console\"}"
 					}
 				}
 				failure {
 					script {		
-						pullRequest.addLabel("Failed")
+						/* pullRequest.addLabel("Failed")
 						gitHubPRStatus githubPRMessage(" Failure ${BUILD_TAG}")
 						pullRequest.createStatus(status: 'failure',
 						 context: 'jenkins',
 						 description: "oops Build got failed ${BUILD_TAG} ${JOB_NAME}",
-						 targetUrl: "${env.JOB_URL}${env.BUILD_NUMBER}/testResults")						
+						 targetUrl: "${env.JOB_URL}${env.BUILD_NUMBER}/testResults")  */
+						
+						curl "https://api.GitHub.com/repos/sangeethak92/CRUD-Release/statuses/$GIT_COMMIT?access_token=7c60a4bf5dfaec7ab21a7cc4a21132b60cba28ab" \
+                                                -H "Content-Type: application/json" \
+                                                -X POST \
+                                                -d "{\"state\": \"failure\",\"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"http://13.233.82.214:8080/job/PR-Request/$BUILD_NUMBER/console\"}"
 					}
 				}
 				
