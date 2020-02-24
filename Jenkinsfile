@@ -94,10 +94,10 @@ pipeline {
 	        stage('Pre check MergeBuild') {
 			when {
   				not {
-  				  
-					  branch 'master' 
-					  branch 'RELEASE*' 
-					  branch 'Release*'
+  				      expression { branch 'master' || branch 'RELEASE*' || branch 'Release*' }
+					
+					   
+					  
   					  }
  				 }
 		            
