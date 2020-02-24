@@ -112,7 +112,7 @@ pipeline {
 			  not{
 			    branch comparator: 'REGEXP', pattern: 'origin/master*'
 			  }
-			
+			}
                    
 			steps {
 				/*script{
