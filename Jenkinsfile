@@ -9,7 +9,7 @@ pipeline {
 						 
 				}
 		}	    
-		stage('Build and Package') {
+		/*stage('Build and Package') {
 			agent { label 'master' }
 				steps {
 					script {
@@ -70,7 +70,7 @@ pipeline {
 		 }
               } 
 		
-
+    */
 			
 		/* stage('Merge the PR Locally') {
 			
