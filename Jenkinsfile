@@ -169,6 +169,7 @@ pipeline {
     post {
          always {
             echo 'JENKINS PIPELINE'
+		 cleanWs()
         }
         success {
             echo 'JENKINS PIPELINE SUCCESSFUL'
