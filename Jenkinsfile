@@ -17,21 +17,9 @@ pipeline {
 						cleanWs()
 					        def scmVars = checkout scm
 						
-					        echo "scmVars.GIT_COMMIT"
-						
-					      echo "git commit *******   ${scmVars.GIT_COMMIT}"
-
-					      // Displaying the variables saving it as environment variable
-					      env.GIT_COMMIT = scmVars.GIT_COMMIT
-					      //echo "env.GIT_COMMIT"
-					      echo " *********   ${env.GIT_COMMIT}"
-						
-						
-						
-						sh "ls"
-						sh "pwd"
-						sh "mvn clean package -DskipTests"
-						//sh "mvn sonar:sonar clean compile package -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=CrudApp -Dsonar.host.url=http://10.62.125.9:8085/ -Dsonar.login=f16fabd2605044f38e79e4c0e4bc5f73c55dd144"				 
+					        env.GIT_COMMIT = scmVars.GIT_COMMIT
+						//sh "mvn clean package -DskipTests"
+						sh "mvn sonar:sonar clean compile package -Dtest=\\!TestRunner* -DfailIfNoTests=false -Dsonar.projectKey=CrudApp -Dsonar.host.url=http://10.62.125.9:8085/ -Dsonar.login=f16fabd2605044f38e79e4c0e4bc5f73c55dd144"				 
 						
 					}
 				}
@@ -83,7 +71,7 @@ pipeline {
 				branch 'PR*'
 			} */
 			steps {
-				sh "git init"
+				
 				sh "git checkout -b ${PR_NUMBER}"	
 				//sh "git checkout -b pullrequest"
 				sh "git fetch origin master:master"					
