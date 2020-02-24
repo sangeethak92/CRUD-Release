@@ -99,7 +99,7 @@ pipeline {
 				
   				      expression { 
 					      
-					    return env.BRANCH_NAME != 'RELEASE*' | env.BRANCH_NAME != 'Release*' | env.BRANCH_NAME != 'master';
+					    env.BRANCH_NAME != 'RELEASE*' || env.BRANCH_NAME != 'Release*' || env.BRANCH_NAME != 'master'
 				      
 				      }
 					
