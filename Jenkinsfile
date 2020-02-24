@@ -109,7 +109,7 @@ pipeline {
 		             // }   
 					  
 			when {	
- 				expression { branch !=  /(master|RELEASE*|stage)/ }
+				expression {${env.BRANCH_NAME} !=  /(master|RELEASE*|stage)/ }
 			}
                    
 			steps {
