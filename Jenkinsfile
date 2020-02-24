@@ -96,7 +96,9 @@ pipeline {
 	      
 	        stage('Pre check MergeBuild') {
 			when {
-				 return env.BRANCH_NAME != 'master';
+				expression { 
+				return env.BRANCH_NAME != 'master';
+				}
 				//expression {env.BRANCH_NAME != 'origin/RELEASE*' || env.BRANCH_NAME != 'origin/Release*' || env.BRANCH_NAME != 'origin/master'}
 					
 					   
