@@ -100,7 +100,7 @@ pipeline {
 					  branch 'Release*'
   					  }
  				 }
-		            }
+		            
 
 			steps {
 					echo 'Clean Build'
