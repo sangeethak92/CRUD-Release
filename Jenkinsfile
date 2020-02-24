@@ -115,7 +115,10 @@ pipeline {
 			steps {
 				script{
 					
-				 if (env.BRANCH_NAME != 'RELEASE*' | env.BRANCH_NAME != 'Release*' | env.BRANCH_NAME != 'master') {	
+					echo " ******* ******* ******  env.BRANCH_NAME"
+					echo "******  ${env.BRANCH_NAME}  ****"
+					
+				 if (env.BRANCH_NAME != '*RELEASE*' | env.BRANCH_NAME != 'Release*' | env.BRANCH_NAME != 'master') {	
 				echo 'Clean Build'
 					sh "ls"
 					//sh "git branch"
