@@ -5,6 +5,9 @@ pipeline {
 		stage('Unit Test') {
 				steps {
 						echo 'Unit Test'
+					
+					
+					echo "***** ${env.BRANCH_NAME} *******"
 						
 						 
 				}
@@ -93,7 +96,7 @@ pipeline {
 	      
 	        stage('Pre check MergeBuild') {
 			when {
-				echo "***** ${env.BRANCH_NAME} *******"
+				
   				      expression { env.BRANCH_NAME != 'RELEASE*' | env.BRANCH_NAME != 'Release*' | env.BRANCH_NAME != 'master' }
 					
 					   
