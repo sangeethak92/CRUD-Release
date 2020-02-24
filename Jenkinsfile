@@ -106,15 +106,14 @@ pipeline {
 				
 				//expression {env.BRANCH_NAME != 'origin/RELEASE*' || env.BRANCH_NAME != 'origin/Release*' || env.BRANCH_NAME != 'origin/master'}
 					
-					   
+		              }   
 					  
   					
- 				 } */
+ 				  */
 		            
                    
 			steps {
-				 if (env.BRANCH_NAME != 'RELEASE*' | env.BRANCH_NAME != 'Release*' | env.BRANCH_NAME != 'master')
-	                          {	
+				 if (env.BRANCH_NAME != 'RELEASE*' | env.BRANCH_NAME != 'Release*' | env.BRANCH_NAME != 'master') {	
 				echo 'Clean Build'
 					sh "ls"
 					//sh "git branch"
