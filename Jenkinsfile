@@ -108,23 +108,22 @@ pipeline {
 					
 		             // }   
 					  
-  					
- 				
-		            
+			when {	
+ 				expression { branch !=  /(master|RELEASE*|stage)/ }
+			}
                    
 			steps {
-				script{
+				/*script{
 					
 					echo " ******* ******* ******  env.BRANCH_NAME"
 					echo "******  ${env.BRANCH_NAME}  ****"
 					
-					if ($env.BRANCH_NAME != 'origin/RELEASE*' | $env.BRANCH_NAME != 'origin/Release*' | $env.BRANCH_NAME != 'origin/master') {	
+					if ($env.BRANCH_NAME != 'origin/RELEASE*' | $env.BRANCH_NAME != 'origin/Release*' | $env.BRANCH_NAME != 'origin/master') {	*/
 				echo 'Clean Build'
 					sh "ls"
 					//sh "git branch"
 					//sh 'mvn clean compile package -Dtest=\\!TestRunner* -DfailIfNoTests=false test'
-				  }
-				}
+				
 			}
 		}	    
 		/*stage('Approve the PR request') {
