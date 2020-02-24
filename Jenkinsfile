@@ -23,23 +23,28 @@ pipeline {
 						
 					}
 				}
-		}				
- /*		stage("XLDeploy Package") {
+		}	
+	      
+	      
+ 		stage("XLDeploy Package") {
 			agent { label 'master' }
             steps {
                 script {
 		     pom = readMavenPom file: "pom.xml";
 		     POM_VERSION = "${pom.version}";
 		     
-                    if (env.BRANCH_NAME == 'master' | env.BRANCH_NAME == 'PR*' ) {
-                       sh "sed -i 's/{{PACKAGE_VERSION}}/$BUILD_NUMBER/g' deployit-manifest.xml"
-				sh "sed -i 's/{{Deploy-App}}/$JOB_BASE_NAME/g' deployit-manifest.xml"
-				xldCreatePackage artifactsPath: 'target', manifestPath: 'deployit-manifest.xml', darPath: "${BUILD_NUMBER}.0.dar"
-                    } else {
+		     if (env.BRANCH_NAME == 'Release*' | env.BRANCH_NAME == 'RELEASE*' ) {
                        sh "sed -i 's/{{PACKAGE_VERSION}}/$pom.version.$BUILD_NUMBER/g' deployit-manifest.xml"
 				sh "sed -i 's/{{Deploy-App}}/$JOB_BASE_NAME/g' deployit-manifest.xml"
 				xldCreatePackage artifactsPath: 'target', manifestPath: 'deployit-manifest.xml', darPath: "${pom.version}.${BUILD_NUMBER}.dar"
                     }
+		    else
+		     {
+                       sh "sed -i 's/{{PACKAGE_VERSION}}/$BUILD_NUMBER/g' deployit-manifest.xml"
+				sh "sed -i 's/{{Deploy-App}}/$JOB_BASE_NAME/g' deployit-manifest.xml"
+				xldCreatePackage artifactsPath: 'target', manifestPath: 'deployit-manifest.xml', darPath: "${BUILD_NUMBER}.0.dar"
+                    } 
+		    
                 }
             }
              } 
@@ -52,19 +57,20 @@ pipeline {
 			
 			script {
 			 pom = readMavenPom file: "pom.xml";
-			 if (env.BRANCH_NAME == 'master' | env.BRANCH_NAME == 'PR*' ) {
-			 
-                               xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${BUILD_NUMBER}.0.dar"
-                       } else {
+			   if (env.BRANCH_NAME == 'RELEASE*' | env.BRANCH_NAME == 'Release*' ) {
 		       
                              xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${pom.version}.${BUILD_NUMBER}.dar"
-                       }
+                       } 
+		           else {
+			 
+                               xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${BUILD_NUMBER}.0.dar"
+                             }
 				
 	             }			
 		 }
               } 
 		
-	*/	
+
 			
 		stage('Merge the PR Locally') {
 			/*when {
