@@ -113,13 +113,15 @@ pipeline {
 		            
                    
 			steps {
+				script{
+					
 				 if (env.BRANCH_NAME != 'RELEASE*' | env.BRANCH_NAME != 'Release*' | env.BRANCH_NAME != 'master') {	
 				echo 'Clean Build'
 					sh "ls"
 					//sh "git branch"
 					//sh 'mvn clean compile package -Dtest=\\!TestRunner* -DfailIfNoTests=false test'
 				  }
-
+				}
 			}
 		}	    
 		/*stage('Approve the PR request') {
