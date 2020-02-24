@@ -111,7 +111,8 @@ pipeline {
 			when {
 			  not{
 			    //branch comparator: 'REGEXP', pattern: 'origin/master* | origin/Release*'
-				  branch comparator: 'REGEXP', pattern: 'origin/master*'
+				  //branch comparator: 'REGEXP', pattern: 'origin/master*'
+				   branch comparator: 'REGEXP', pattern: 'origin/Release.*|origin/master|origin/RELEASE.*'
 			  }
 			}
                    
