@@ -92,9 +92,16 @@ pipeline {
 		} */
 	      
 	        stage('Pre check MergeBuild') {
-			/*when {
-				branch 'PR*'
-			}*/
+			when {
+  				not {
+  				  allOf {
+					  branch 'master' 
+					  branch 'RELEASE*' 
+					  branch 'Release*'
+  					  }
+ 				 }
+		            }
+
 			steps {
 					echo 'Clean Build'
 					sh "ls"
@@ -104,9 +111,15 @@ pipeline {
 			}
 		}	    
 		stage('Approve the PR request') {
-			/*when {
-				branch 'PR*'
-			} */
+			when {
+  				not {
+  				  allOf {
+					  branch 'master' 
+					  branch 'RELEASE*' 
+					  branch 'Release*'
+  					  }
+ 				 }
+		            }
 			steps {
 				echo "Approve"
 				sh "curl --user tonysandeep:Qwerty0420 --data '{\"body\":\"This PR build is success from ${BUILD_TAG}\",\"event\":\"APPROVE\"}' --header Content-Type:application/json  --request POST https://api.github.com/repos/sangeethak92/CRUD-Release/pulls/${PR_NUMBER}/reviews"
