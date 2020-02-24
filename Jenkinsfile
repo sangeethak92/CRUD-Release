@@ -72,10 +72,8 @@ pipeline {
 		
 
 			
-		stage('Merge the PR Locally') {
-			/*when {
-				branch 'PR*'
-			} */
+		/* stage('Merge the PR Locally') {
+			
 			steps {
 				
 				sh "git checkout -b ${PR_NUMBER}"	
@@ -91,7 +89,7 @@ pipeline {
 				//sh "git rebase master"
 				//sh "git push -f origin master"
 			}
-		}
+		} */
 	      
 	        stage('Pre check MergeBuild') {
 			/*when {
