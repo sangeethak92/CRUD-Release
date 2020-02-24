@@ -94,7 +94,7 @@ pipeline {
 	        stage('Pre check MergeBuild') {
 			when {
   				not {
-  				  allOf {
+  				  anyOf {
 					  branch 'master' 
 					  branch 'RELEASE*' 
 					  branch 'Release*'
@@ -113,7 +113,7 @@ pipeline {
 		stage('Approve the PR request') {
 			when {
   				not {
-  				  allOf {
+  				  anyOf {
 					  branch 'master' 
 					  branch 'RELEASE*' 
 					  branch 'Release*'
