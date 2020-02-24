@@ -6,7 +6,7 @@ pipeline {
 	    stage('Starting the Release for QA') {
 			    steps {
 			        
-			      xlrCreateRelease releaseTitle: 'Release from $BUILD_TAG', serverCredentials: 'XLReleaseServer', startRelease: true, template: 'Test/QAReleaseTemplate', variables: [[propertyName: 'BUILD_NUMBER', propertyValue: '${BUILD_NUMBER}'], [propertyName: 'PR_NUMBER', propertyValue: '${PR_NUMBER}']]
+			      xlrCreateRelease releaseTitle: 'Release from $BUILD_TAG', serverCredentials: 'XLReleaseServer', startRelease: true, template: 'Test/QAReleaseTemplate', variables: [[propertyName: 'BUILD_NUMBER', propertyValue: '${BUILD_NUMBER}'], [propertyName: 'PR_NUMBER', propertyValue: '${PR_NUMBER}'], [propertyName: 'BRANCH_NAME', propertyValue: '${BRANCH_NAME}']]
 			      
 			    }
 		} 
