@@ -107,10 +107,12 @@ pipeline {
 				//expression {env.BRANCH_NAME != 'origin/RELEASE*' || env.BRANCH_NAME != 'origin/Release*' || env.BRANCH_NAME != 'origin/master'}
 					
 		             // }   
-					  
-			when {	
-				expression {${env.BRANCH_NAME} !=  /(master|RELEASE*|stage)/ }
-			}
+				|
+			when {
+			  not{
+			    branch comparator: 'REGEXP', pattern: 'origin/master*||origin/REL*'
+			  }
+			
                    
 			steps {
 				/*script{
@@ -118,7 +120,8 @@ pipeline {
 					echo " ******* ******* ******  env.BRANCH_NAME"
 					echo "******  ${env.BRANCH_NAME}  ****"
 					
-					if ($env.BRANCH_NAME != 'origin/RELEASE*' | $env.BRANCH_NAME != 'origin/Release*' | $env.BRANCH_NAME != 'origin/master') {	*/
+					
+					if (env.BRANCH_NAME != 'origin/RELEASE*' | $env.BRANCH_NAME != 'origin/Release*' | $env.BRANCH_NAME != 'origin/master') {	*/
 				echo 'Clean Build'
 					sh "ls"
 					//sh "git branch"
