@@ -32,7 +32,7 @@ pipeline {
 						
 						   pom = readMavenPom file: "pom.xml";
 						   env.POMVERSION = pom.version
-						   sh 'echo  VERSION=$POMVERSION.$BUILD_NUMBER >> /tmp/pomversion.$BUILD_NUMBER.txt'
+						   sh 'echo  VERSION=$POMVERSION >> /tmp/pomversion.$BUILD_NUMBER.txt'
 						   echo "******************* $POMVERSION*********"
 						
 						}
