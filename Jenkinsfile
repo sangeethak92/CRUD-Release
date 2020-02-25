@@ -12,7 +12,7 @@ pipeline {
 						 
 				}
 		}	    
-		/*stage('Build and Package') {
+		stage('Build and Package') {
 			agent { label 'master' }
 				steps {
 					script {
@@ -73,7 +73,7 @@ pipeline {
 		 }
               } 
 		
-    */
+   
 			
 		/* stage('Merge the PR Locally') {
 			
@@ -95,52 +95,30 @@ pipeline {
 		} */
 	      
 	        stage('Pre check MergeBuild') {
-			 // when {
-				/*expression { 
-				return env.BRANCH_NAME != 'master';
-				}*/
-				
-				/*not{
-					branch 'master'
-				}*/		
-				
-				//expression {env.BRANCH_NAME != 'origin/RELEASE*' || env.BRANCH_NAME != 'origin/Release*' || env.BRANCH_NAME != 'origin/master'}
-					
-		             // }   
 				
 			when {
 			  not{
-			    //branch comparator: 'REGEXP', pattern: 'origin/master* | origin/Release*'
-				  //branch comparator: 'REGEXP', pattern: 'origin/master*'
+			   
 				   branch comparator: 'REGEXP', pattern: 'origin/Release.*|origin/master|origin/RELEASE.*'
 			  }
 			}
                    
 			steps {
-				/*script{
-					
-					echo " ******* ******* ******  env.BRANCH_NAME"
-					echo "******  ${env.BRANCH_NAME}  ****"
-					
-					
-					if (env.BRANCH_NAME != 'origin/RELEASE*' | $env.BRANCH_NAME != 'origin/Release*' | $env.BRANCH_NAME != 'origin/master') {	*/
+				
 				echo 'Clean Build'
 					sh "ls"
-					//sh "git branch"
-					//sh 'mvn clean compile package -Dtest=\\!TestRunner* -DfailIfNoTests=false test'
+					sh "git branch"
+					sh 'mvn clean compile package -Dtest=\\!TestRunner* -DfailIfNoTests=false test'
 				
 			}
 		}	    
-		/*stage('Approve the PR request') {
+		stage('Approve the PR request') {
 			when {
-  				not {
-  				  anyOf {
-					  branch 'master' 
-					  branch 'RELEASE*' 
-					  branch 'Release*'
-  					  }
- 				 }
-		            }
+			  not{
+			   
+				   branch comparator: 'REGEXP', pattern: 'origin/Release.*|origin/master|origin/RELEASE.*'
+			  }
+			}
 			steps {
 				echo "Approve"
 				sh "curl --user tonysandeep:Qwerty0420 --data '{\"body\":\"This PR build is success from ${BUILD_TAG}\",\"event\":\"APPROVE\"}' --header Content-Type:application/json  --request POST https://api.github.com/repos/sangeethak92/CRUD-Release/pulls/${PR_NUMBER}/reviews"
@@ -165,7 +143,7 @@ pipeline {
 			}
 		}
 		
-		*/
+		
 		
 		
 		
