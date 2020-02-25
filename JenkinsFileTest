@@ -133,7 +133,7 @@ pipeline {
 				echo "test phase"
 			}
 		}					
-		stage('Merge the PR Locally') {
+		/* stage('Merge the PR Locally') {
 			when {
 				branch 'PR*'
 			}
@@ -181,6 +181,9 @@ pipeline {
 				
 			}
 		}
+		
+		*/
+		
 		/* stage('Release Approval') {
 			when {
 				anyOf { branch 'Re*' 
