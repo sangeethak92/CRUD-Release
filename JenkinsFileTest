@@ -93,7 +93,7 @@ pipeline {
                                xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${BUILD_NUMBER}.0.dar"
                        } else {
 		       
-                             xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${pom.version}.${BUILD_NUMBER}.dar"
+                             xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${pom.version}-${BUILD_NUMBER}.dar"
                        }
 				
 	             }			
