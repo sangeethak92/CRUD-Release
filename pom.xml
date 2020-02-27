@@ -3,7 +3,7 @@
 	<groupId>com.jwt.spring</groupId>
 	<artifactId>SpringMVCHibernateCRUD</artifactId>
 	<packaging>war</packaging>
-	<version>22.0</version>
+	<version>23.0-SNAPSHOT</version>
 	<name>SpringMVCHibernateCRUD Maven Webapp</name>
 	<url>http://maven.apache.org</url>
        <!-- Specifying the Versions of Spring, Hiberante, MySQL etc -->
