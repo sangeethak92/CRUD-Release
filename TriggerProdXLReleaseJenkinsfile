@@ -3,6 +3,11 @@ pipeline {
     options { skipDefaultCheckout() }
    stages {
       stage('Starting the Release for Prod') {
+          when {
+			 
+			   
+				   branch comparator: 'REGEXP', pattern: 'origin/Release.*|origin/RELEASE.*'
+			  }
 		    steps {
 		        script {
 			  
