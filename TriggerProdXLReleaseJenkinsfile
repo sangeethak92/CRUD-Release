@@ -2,6 +2,11 @@ pipeline {
    agent { label 'master' }
     options { skipDefaultCheckout() }
    stages {
+   stage('Hook Script') {
+      steps{
+          echo "Hook Script"
+	  }
+	  }
       stage('Starting the Release for Prod') {
           when {
 			 
