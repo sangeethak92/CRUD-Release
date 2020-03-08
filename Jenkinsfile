@@ -164,9 +164,12 @@ pipeline {
         }
         failure {
             echo 'JENKINS PIPELINE FAILED'
+	    echo "RES: ${currentBuild.currentResult}"
+            
         }
         unstable {
             echo 'JENKINS PIPELINE WAS MARKED AS UNSTABLE'
+	    echo "RES: ${currentBuild.currentResult}"
         }
         changed {
             echo 'JENKINS PIPELINE STATUS HAS CHANGED SINCE LAST EXECUTION'
