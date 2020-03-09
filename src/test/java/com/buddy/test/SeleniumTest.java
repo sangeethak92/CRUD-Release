@@ -23,7 +23,7 @@ public class SeleniumTest {
         driver = new RemoteWebDriver(new URL("http://10.62.125.4:4444/wd/hub"), capability);
 	//driver = new RemoteWebDriver(new URL("http://35.244.62.220:4444/wd/hub"), capability);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS)
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
 
     @Test
