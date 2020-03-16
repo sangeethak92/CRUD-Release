@@ -327,15 +327,11 @@ pipeline {
         }
         success {
             echo 'JENKINS PIPELINE SUCCESSFUL'
-	    sh """
-	    echo "$currentBuild.currentResult}" >>> /tmp/buildstatus.${BUILD_NUMBER}.txt
-	    """
+	  
         }
         failure {
             echo 'JENKINS PIPELINE FAILED'
-	    sh """
-	    echo "$currentBuild.currentResult}" >>> /tmp/buildstatus.${BUILD_NUMBER}.txt
-	    """
+	    
         }
         unstable {
             echo 'JENKINS PIPELINE WAS MARKED AS UNSTABLE'
