@@ -94,7 +94,7 @@ pipeline {
 			}
 		} */
 	      
-	        stage('Pre check MergeBuild') {
+	        /*stage('Pre check MergeBuild') {
 				
 			when {
 			  not{
@@ -111,7 +111,7 @@ pipeline {
 					sh 'mvn clean compile package -Dtest=\\!TestRunner* -DfailIfNoTests=false test'
 				
 			}
-		}	    
+		}	*/    
 		stage('Approve the PR request') {
 			when {
 			  not{
