@@ -130,13 +130,13 @@ pipeline {
 						
 						echo "git commit !!!!!!!!!!!!!!  ${env.GIT_COMMIT}"
 						
-						sh "curl --user sangeethak92:Jothi@1724 --data '{\"state\": \"success\",\"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"http://13.233.82.214:8080/job/$JOB_NAME/$BUILD_NUMBER/console\"}' --header Content-Type:application/json --request POST https://api.GitHub.com/repos/sangeethak92/CRUD-Release/statuses/$env.GIT_COMMIT"
+						sh "curl --user sangeethak92:Jothi@1724 --data '{\"state\": \"success\",\"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"http://10.62.125.9:8087/job/$JOB_NAME/$BUILD_NUMBER/console\"}' --header Content-Type:application/json --request POST https://api.GitHub.com/repos/sangeethak92/CRUD-Release/statuses/$env.GIT_COMMIT"
 					}
 				}
 				failure {
 					script {		
 						
-						sh "curl --user sangeethak92:Jothi@1724 --data '{\"state\": \"failure\",\"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"http://13.233.82.214:8080/job/$JOB_NAME/$BUILD_NUMBER/console\"}' --header Content-Type:application/json --request POST https://api.GitHub.com/repos/sangeethak92/CRUD-Release/statuses/$env.GIT_COMMIT"
+						sh "curl --user sangeethak92:Jothi@1724 --data '{\"state\": \"failure\",\"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"http://10.62.125.9:8087/job/$JOB_NAME/$BUILD_NUMBER/console\"}' --header Content-Type:application/json --request POST https://api.GitHub.com/repos/sangeethak92/CRUD-Release/statuses/$env.GIT_COMMIT"
 					}
 				}
 				
