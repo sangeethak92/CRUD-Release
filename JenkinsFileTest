@@ -119,7 +119,7 @@ pipeline {
 					xlrCreateRelease releaseTitle: 'Release for $BUILD_TAG', serverCredentials: 'XLReleaseServer', startRelease: true, template: 'Demo/ReleaseTemplate-1.0', variables: [[propertyName: 'Version', propertyValue: "$BUILD_NUMBER.0"], [propertyName: 'Environment', propertyValue: 'QATomcatENv']]
 				}
 		}*/
-		stage('Test Automation') {
+		/* stage('Test Automation') {
 			when {
 				branch 'PR*'
 				not {
@@ -132,7 +132,7 @@ pipeline {
 			steps {
 				echo "test phase"
 			}
-		}					
+		} */					
 		/* stage('Merge the PR Locally') {
 			when {
 				branch 'PR*'
