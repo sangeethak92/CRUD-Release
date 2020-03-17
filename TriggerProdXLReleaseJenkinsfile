@@ -16,7 +16,7 @@ pipeline {
 		    steps {
 		        script {
 			  
-			    xlrCreateRelease releaseTitle: 'Release from $BUILD_TAG', serverCredentials: 'XLReleaseServer', startRelease: true, template: 'Sample/ProdReleaseTemplate-RollBack', variables: [[propertyName: 'BRANCH_NAME', propertyValue: '${BRANCH_NAME}']]
+			    xlrCreateRelease releaseTitle: 'Release from $BUILD_TAG', serverCredentials: 'XLReleaseServer', startRelease: true, template: 'Sample/ProdReleaseTemplate-RollBack1', variables: [[propertyName: 'BRANCH_NAME', propertyValue: '${BRANCH_NAME}']]
 			       }
                }			       
      }        
