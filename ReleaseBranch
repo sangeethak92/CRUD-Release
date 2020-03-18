@@ -5,8 +5,11 @@ pipeline {
 		
 		stage('Build and Package') {
 		when {
-    branch 'Rel*'
-    }
+		   anyOf { 
+		      branch 'Re*' 
+    
+                         }
+			 }
 				steps {
         
         echo "pipeline"
