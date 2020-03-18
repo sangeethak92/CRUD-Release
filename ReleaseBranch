@@ -16,6 +16,18 @@ pipeline {
         
         }
      }
+     
+     stage('Approve the PR request') {
+			when {
+			  not{
+			   
+				   branch comparator: 'REGEXP', pattern: 'origin/master'
+			  }
+			}
+			steps {
+				echo "Approve"
+				
+			}
   }
  }
 				
