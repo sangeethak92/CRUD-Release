@@ -125,7 +125,7 @@ pipeline {
 				sh "curl --user tonysandeep:Qwerty0420 --data '{\"body\":\"This PR build is success from ${BUILD_TAG}\",\"event\":\"APPROVE\"}' --header Content-Type:application/json  --request POST https://api.github.com/repos/sangeethak92/CRUD-Release/pulls/${env.CHANGE_ID}/reviews" 
 			}
 			post {
-				success{
+				/*success{
 					script { 
 						
 						
@@ -138,6 +138,27 @@ pipeline {
 					script {		
 						
 						sh "curl --user sangeethak92:Jothi1724 --data '{\"state\": \"failure\",\"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"http://10.62.125.9:8087/job/$JOB_NAME/$BUILD_NUMBER/console\"}' --header Content-Type:application/json --request POST https://api.GitHub.com/repos/sangeethak92/CRUD-Release/statuses/$env.GIT_COMMIT"
+					}
+				} */
+				
+				success{
+					script { 
+						pullRequest.addLabel('BUILD SUCCESS')
+						gitHubPRStatus githubPRMessage(" SUCCESS ${JOB_NAME}")
+						pullRequest.createStatus(status: 'success',
+						 context: 'Jenkins',
+						 description: "This PR passed the Jenkins Reg Test ${BUILD_TAG} ${JOB_NAME}",
+						 targetUrl: "${env.JOB_URL}${env.BUILD_NUMBER}/testResults")						
+					}
+				}
+				failure {
+					script {		
+						pullRequest.addLabel("Failed")
+						gitHubPRStatus githubPRMessage(" Failure ${BUILD_TAG}")
+						pullRequest.createStatus(status: 'failure',
+						 context: 'jenkins',
+						 description: "oops Build got failed ${BUILD_TAG} ${JOB_NAME}",
+						 targetUrl: "${env.JOB_URL}${env.BUILD_NUMBER}/testResults")						
 					}
 				}
 				
