@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+    options { skipDefaultCheckout() }
+      stages {
+		when {
+    branch 'Rel*'
+    }
+		stage('Build and Package') {
+		
+				steps {
+        
+        echo "pipeline"
+        
+        }
+     }
+  }
+ }
+				
+				  
