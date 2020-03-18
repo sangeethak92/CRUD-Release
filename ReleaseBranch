@@ -5,11 +5,11 @@ pipeline {
 		
 		stage('Build and Package') {
 		when {
-		   anyOf { 
-		      branch 'Re*' 
-    
-                         }
-			 }
+			  
+			   
+				   branch comparator: 'REGEXP', pattern: 'origin/Release.*|origin/RELEASE.*|origin/Release-*|origin/RELEASE-*'
+			  
+			}
 				steps {
         
         echo "pipeline"
