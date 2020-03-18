@@ -2,11 +2,11 @@ pipeline {
     agent any
     options { skipDefaultCheckout() }
       stages {
+		
+		stage('Build and Package') {
 		when {
     branch 'Rel*'
     }
-		stage('Build and Package') {
-		
 				steps {
         
         echo "pipeline"
