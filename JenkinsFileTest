@@ -21,7 +21,6 @@ pipeline {
 				   script {
 		                         
 					 	echo "********"
-						
 						echo "$ref"
 						
 						cleanWs()
