@@ -20,11 +20,13 @@ pipeline {
 				
 				   script {
 		                         
+					 	echo "********"
+						echo "$ref"
+						
 						cleanWs()
 						checkout scm
 						
-						echo "********"
-						echo "$ref"
+						
 						
 						sh "ls"
 						sh "pwd"
