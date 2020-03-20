@@ -23,6 +23,7 @@ pipeline {
 					 	echo "********"
 						echo "$ref"
 						
+						
 						cleanWs()
 						checkout scm
 						
