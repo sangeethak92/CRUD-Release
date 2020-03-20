@@ -19,7 +19,6 @@ pipeline {
 				steps {
 				
 				   script {
-		                         
 					 	echo "********"
 						echo "$ref"
 						
