@@ -19,7 +19,7 @@ pipeline {
 				steps {
 				
 				   script {
-					 	echo "********"
+					 	echo "********" 
 						echo "$ref"
 						
 						cleanWs()
