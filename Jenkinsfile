@@ -121,11 +121,11 @@ pipeline {
 			}
 			steps {
 				echo "Approve"
-				/* sh "curl --user tonysandeep:Qwerty0420 --data '{\"body\":\"This PR build is success from ${BUILD_TAG}\",\"event\":\"APPROVE\"}' --header Content-Type:application/json  --request POST https://api.github.com/repos/sangeethak92/CRUD-Release/pulls/${PR_NUMBER}/reviews" */
-				sh "curl --user tonysandeep:Qwerty0420 --data '{\"body\":\"This PR build is success from ${BUILD_TAG}\",\"event\":\"APPROVE\"}' --header Content-Type:application/json  --request POST https://api.github.com/repos/sangeethak92/CRUD-Release/pulls/${env.CHANGE_ID}/reviews" 
+			       sh "curl --user tonysandeep:Qwerty0420 --data '{\"body\":\"This PR build is success from ${BUILD_TAG}\",\"event\":\"APPROVE\"}' --header Content-Type:application/json  --request POST https://api.github.com/repos/sangeethak92/CRUD-Release/pulls/${PR_NUMBER}/reviews" 
+				/*sh "curl --user tonysandeep:Qwerty0420 --data '{\"body\":\"This PR build is success from ${BUILD_TAG}\",\"event\":\"APPROVE\"}' --header Content-Type:application/json  --request POST https://api.github.com/repos/sangeethak92/CRUD-Release/pulls/${env.CHANGE_ID}/reviews" */
 			}
 			post {
-				/*success{
+				success{
 					script { 
 						
 						
@@ -139,9 +139,9 @@ pipeline {
 						
 						sh "curl --user sangeethak92:Jothi1724 --data '{\"state\": \"failure\",\"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"http://10.62.125.9:8087/job/$JOB_NAME/$BUILD_NUMBER/console\"}' --header Content-Type:application/json --request POST https://api.GitHub.com/repos/sangeethak92/CRUD-Release/statuses/$env.GIT_COMMIT"
 					}
-				} */
+				} 
 				
-				success{
+				 /* success{
 					script { 
 						pullRequest.addLabel('BUILD SUCCESS')
 						gitHubPRStatus githubPRMessage(" SUCCESS ${JOB_NAME}")
@@ -161,6 +161,8 @@ pipeline {
 						 targetUrl: "${env.JOB_URL}${env.BUILD_NUMBER}/testResults")						
 					}
 				}
+				
+				*/
 				
 			}
 		}
