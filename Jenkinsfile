@@ -51,6 +51,7 @@ pipeline {
 		    else
 		    {
 		    echo "********************* CHECK THE BRANCH NAME  *****************"
+	             echo "env.BRANCH_NAME"
 		    }
 		    
                 }
@@ -77,6 +78,7 @@ pipeline {
 			     else
 			     {
 			     echo "********************* CHECK THE BRANCH NAME  *****************"
+	                      echo "env.BRANCH_NAME"
 			     }
 				
 	             }			
