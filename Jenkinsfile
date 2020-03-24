@@ -41,7 +41,7 @@ pipeline {
 				sh "sed -i 's/{{Deploy-App}}/$JOB_BASE_NAME/g' deployit-manifest.xml"
 				xldCreatePackage artifactsPath: 'target', manifestPath: 'deployit-manifest.xml', darPath: "${pom.version}.${BUILD_NUMBER}.dar"
                     }
-		    else if(env.BRANCH_NAME == 'master') {
+			else if(${env.BRANCH_NAME} == 'origin/master') {
 		     
                        sh "sed -i 's/{{PACKAGE_VERSION}}/$BUILD_NUMBER/g' deployit-manifest.xml"
 				sh "sed -i 's/{{Deploy-App}}/$JOB_BASE_NAME/g' deployit-manifest.xml"
@@ -51,7 +51,7 @@ pipeline {
 		    else
 		    {
 		    echo "********************* CHECK THE BRANCH NAME  *****************"
-	             echo "env.BRANCH_NAME"
+			    echo "${env.BRANCH_NAME}"
 		    }
 		    
                 }
@@ -70,7 +70,7 @@ pipeline {
 		       
                              xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${pom.version}.${BUILD_NUMBER}.dar"
                        } 
-		           else if (env.BRANCH_NAME == 'master'){
+				else if (${env.BRANCH_NAME} == 'origin/master'){
 			 
                                xldPublishPackage serverCredentials: 'XLDeployServer', darPath: "${BUILD_NUMBER}.0.dar"
                              }
@@ -78,7 +78,7 @@ pipeline {
 			     else
 			     {
 			     echo "********************* CHECK THE BRANCH NAME  *****************"
-	                      echo "env.BRANCH_NAME"
+				     echo "${env.BRANCH_NAME}"
 			     }
 				
 	             }			
