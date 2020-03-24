@@ -29,7 +29,7 @@ pipeline {
 		}	
 	      
 	      
-/* 		stage("XLDeploy Package") {
+		stage("XLDeploy Package") {
 			agent { label 'master' }
             steps {
                 script {
@@ -83,7 +83,7 @@ pipeline {
 		 }
               } 
 		
-            */                 
+                           
 			
 		/* stage('Merge the PR Locally') {
 			
