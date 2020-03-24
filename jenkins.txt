@@ -1,2 +1,3 @@
 #this is the Jenkins properties file
 jenkinsTest
+Test run
