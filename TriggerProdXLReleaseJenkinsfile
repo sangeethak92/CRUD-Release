@@ -5,6 +5,8 @@ pipeline {
    stage('Hook Script') {
       steps{
           echo "Hook Script"
+	  echo "$BRANCH_NAME"
+	  echo "${BRANCH_NAME}"
 	  }
 	  }
       stage('Starting the Release for Prod') {
