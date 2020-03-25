@@ -8,11 +8,11 @@ pipeline {
 	  }
 	  }
       stage('Starting the Release for Prod') {
-          when {
+          /* when {
 			 
 			   
 				   branch comparator: 'REGEXP', pattern: 'origin/Release.*|origin/RELEASE.*|origin/release/.*|release/.*'
-			  }
+			  } */
 		    steps {
 		        script {
 			  
