@@ -11,7 +11,7 @@ pipeline {
           when {
 			 
 			   
-				   branch comparator: 'REGEXP', pattern: 'origin/Release.*|origin/RELEASE.*|origin/release/*'
+				   branch comparator: 'REGEXP', pattern: 'origin/Release.*|origin/RELEASE.*|origin/release/.*|release/.*'
 			  }
 		    steps {
 		        script {
