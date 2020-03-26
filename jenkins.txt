@@ -1,7 +1,0 @@
-#this is the Jenkins properties file
-jenkinsTest
-Test run
-Test run2
-build should not happen
-build should run
-seven line
