@@ -6,7 +6,7 @@ pipeline {
 		stage('Build and Package') {
 		when {
 			  
-			   
+			      echo "****"
 				   branch comparator: 'REGEXP', pattern: 'origin/Release.*|origin/RELEASE.*|origin/Release-*|origin/RELEASE-*'
 			  
 			}
